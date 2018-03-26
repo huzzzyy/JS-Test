@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		test
+	</title>
+	<style type="text/css">
+	.show{display:block;}
+	.hide{display:none;}
+	.mainiphones img { width: 150px; }
+	.mainiphones button { padding: 5px; margin: 5px;  }
+	</style>
+
+	<script type="text/javascript">
+	function showImg(id)
+	{
+		var iphones = document.querySelectorAll('.iphone');
+		console.log(iphones);
+		for (var i = 0; i < iphones.length; i++) {
+			iphones[i].className = 'hide iphone';
+		}
+		var obj=document.getElementById(id);
+		obj.className = 'show iphone';
+	}
+	</script>
+
+</head>
+<body>
+
+	<div>	
+		<img src="logo.png" style= "width: 100px";>
+	</div>
+	
+	<div class="mainiphones">
+	
+		<img id="Picture1" src="black.jpeg" class="hide iphone">
+		<button type="button" onclick = "showImg('Picture1')">Black</button>
+
+		<img id="Picture2" src="blue.jpeg" class="hide iphone">
+		<button type="button" onclick = "showImg('Picture2')">Blue</button>
+		
+		<img id="Picture3" src="gold.jpeg" class="hide iphone">
+		<button type="button" onclick = "showImg('Picture3')">Gold</button>
+		
+		<img id="Picture4" src="rose-gold.jpeg" class="hide iphone">
+		<button type="button" onclick = "showImg('Picture4')">Rose Gold</button>
+	
+	</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
