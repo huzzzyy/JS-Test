@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">// <![CDATA[
+    function submitted() {
+  var fname =  document.querySelector("#firstName").value
+  var lname =  document.querySelector("#lastName").value
+  var zipcode =  document.querySelector("#zipCode").value
+  var address =  document.querySelector("#address").value
+  var email =  document.querySelector("#email").value
+  var phonenumber =  document.querySelector("#phoneNumber").value
+  var dataobj = {
+    firstName:fname,
+    lastName:lname,
+    zipCode:zipcode,
+    email:email,
+    address:address,
+    phoneNumber:phonenumber
+  }
+  var requrl = 'https://imtrk.go2cloud.org/aff_c?offer_id=547&aff_id=1&file_id=771&firstName='+fname+'&lastName='+lname+'&email='+email+'&address='+address+'&zipCode='+zipcode+'&phoneNumber='+phonenumber+'&format=json'
+    var xhttp = new XMLHttpRequest();
+xhttp.open("POST", requrl, true);
+xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+xhttp.onreadystatechange = function() {
+   if (this.readyState == 4 && this.status == 200) {
+
+      // Response
+      var response = this.responseText; 
+      var myJSON = JSON.parse(response);
+var transaction_id = myJSON.response.data.transaction_id;
+dataobj.transaction_id = transaction_id
+dataobj = JSON.stringify(dataobj)
+window.localStorage.setItem('dataobj',dataobj)
+impression();
+   }
+};
+xhttp.send();
+    // alert("https://imtrk.go2cloud.org/aff_c?offer_id=547&aff_id=1&file_id=771");
+  }
+  function impression(){
+   var userdata = window.localStorage.getItem('dataobj')
+    // userdata = JSON.parse(userdata)
+// https://imtrk.go2cloud.org/aff_lsr?transaction_id=TRANSACTION_ID&s_firstName=FIRSTNAME&s_lastName=LASTNAME&s_email=EMAIL&s_zipCode=ZIPCODE&s_phoneNumber=PHONENUMBER&s_address=ADDRESS
+var requrl = 'https://my-json-server.typicode.com/huzzzyy/JS-Test?transaction_id='+userdata.transaction_id+'&s_firstName='+userdata.firstName+'&s_lastName='+userdata.lastName+'&s_email='+userdata.email+'&s_address='+userdata.address+'&s_zipCode='+userdata.zipCode+'&s_phoneNumber='+userdata.phoneNumber+'&format=json'
+// fetch('https://my-json-server.typicode.com/huzzzyy/JS-Test/db', {
+//   method: 'POST',
+//   body: JSON.stringify({
+//     title: 'foo',
+//     body: 'bar',
+//     userId: 1,
+//   }),
+//   headers: {
+//     'Content-type': 'application/json; charset=UTF-8',
+//   },
+// })
+//   .then((response) => response.json())
+//   .then((json) => console.log(json));
+fetch('https://my-json-server.typicode.com/huzzzyy/JS-Test/db', {
+  method: 'POST',
+  body: JSON.stringify({
+    title: 'foo',
+    body: 'bar',
+    userId: 1,
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then((json) => console.log(json));
+//     var xhttp = new XMLHttpRequest();
+// xhttp.open("POST", requrl, true);
+// xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+// xhttp.onreadystatechange = function() {
+//    if (this.readyState == 4 && this.status == 200) {
+
+//       // Response
+//       var response = this.responseText; 
+//       document.querySelector("#firstName").value = ''
+//   document.querySelector("#lastName").value= ''
+//   document.querySelector("#zipCode").value= ''
+//   document.querySelector("#address").value= ''
+//   document.querySelector("#email").value= ''
+//   document.querySelector("#phoneNumber").value= ''
+//   alert("Conversion Fired")
+//    }
+// };
+// xhttp.send();
+    // a
+  }
+// ]]></script>
+<form>
+  <label>First Name:</label> <input type="text" id="firstName" /><br />
+  <label>Last Name:</label> <input type="text" id="lastName" /><br />
+  <label>Email:</label> <input type="text" id="email" /><br />
+  <label>Address:</label> <input type="text" id="address" /><br />
+  <label>Zip Code:</label> <input type="text" id="zipCode" /><br />
+  <label>Phone Number:</label> <input type="text" id="phoneNumber" /><br />
+  <input type="button" value="Submit" onclick="submitted()" />
+</form>
+<img
+  src="https://imtrk.go2cloud.org/aff_i?offer_id=547&aff_id=1&file_id=771&firstName={firstName}&lastName={lastName}&email={email}&address={address}&zipCode={zipCode}&phoneNumber={phoneNumber}"
+  width="0" height="0" style="position:absolute;visibility:hidden;border:0" />
+</body>
+</html>
