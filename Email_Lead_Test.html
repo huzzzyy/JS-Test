@@ -45,7 +45,7 @@ xhttp.send();
   }
   function impression(){
    var userdata = window.localStorage.getItem('dataobj')
-    // userdata = JSON.parse(userdata)
+    userdata = JSON.parse(userdata)
 // https://imtrk.go2cloud.org/aff_lsr?transaction_id=TRANSACTION_ID&s_firstName=FIRSTNAME&s_lastName=LASTNAME&s_email=EMAIL&s_zipCode=ZIPCODE&s_phoneNumber=PHONENUMBER&s_address=ADDRESS
 var requrl = 'https://my-json-server.typicode.com/huzzzyy/JS-Test?transaction_id='+userdata.transaction_id+'&s_firstName='+userdata.firstName+'&s_lastName='+userdata.lastName+'&s_email='+userdata.email+'&s_address='+userdata.address+'&s_zipCode='+userdata.zipCode+'&s_phoneNumber='+userdata.phoneNumber+'&format=json'
 // fetch('https://my-json-server.typicode.com/huzzzyy/JS-Test/db', {
